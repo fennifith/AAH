@@ -49,6 +49,8 @@ cd ~/go/src/github.com/TheAndroidMaster/AAH
 go get && go build && go install
 ```
 
+After this, you can try running `AAH` to check that it has installed properly.
+
 ## Configuration
 
 Configuration is fairly basic. The program will use the [`aahelp.yaml`](./aahelp.yaml) file in the repository by default. You can override this file by creating your own located at `~/.aahelp.yaml`.
@@ -67,3 +69,7 @@ thing:
 ```
 
 You could type `AAH thing something yes stuff` to get the value `this is a thing`. Alternatively, you could just type `AAH thing something yes` to get a list of everything below the key `yes` in the YAML hierarchy.
+
+## Contributing
+
+See this project's [CONTRIBUTING.md](./.github/CONTRIBUTING.md) for instructions on how to contribute to this project.
