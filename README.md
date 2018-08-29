@@ -10,14 +10,49 @@ mount: 		mkdir /mnt/disk && mount <device> /mnt/disk
 
 ## Installation
 
-Installation is fairly simple. I will not provide a prebuilt binary for this project, however I can't see many people using it if I did, and I would need to write a post-install (or first-run, idk, both are technically applicable) script to download the aahelp.yaml file (explained below). Regardless, installing this project from source is fairly simple, so I doubt that there is anything lost in making this decision.
+Installation is fairly simple. You can either install from source or use the prebuilt binary. Both are fairly simple.
 
-### Prerequisites
+### Prebuilt Binary
+
+Downloading a prebuilt binary is fairly simple. Simply choose a file from the [releases](../../releases) page and run the commands below, replacing the information in brackets with their respective values.
+
+```shell
+wget https://github.com/TheAndroidMaster/AAH/releases/download/{version}/AAH-{platform}
+mv AAH-{platform} AAH
+chmod +x AAH
+```
+
+You can now run `./AAH` to check that the it works. If you would like to run the program without having to remember the directory that it is stored in, you can either add its directory to the `$PATH` environment variable or move the file to somewhere that is in your `$PATH`.
+
+#### Moving to Somewhere in `$PATH`
+
+```shell
+sudo su
+mv AAH /bin/AAH
+```
+
+Yep.
+
+#### Adding Directory to `$PATH`
+
+This assumes that you have downloaded the binary to a folder titled `~/bin`. Feel free to change the directory as you wish.
+
+Add the following line to the bottom of `~/.bashrc`:
+
+```shell
+export PATH="$PATH:~/bin"
+```
+
+Then run `source ~/.bashrc`. Finally, run `AAH` to check that it works.
+
+### Source
+
+#### Prerequisites
 
 - [git](https://git-scm.org/downloads)
 - [go](https://golang.org/dl/)
 
-### Setup
+#### Setup
 
 If you have `go` set up already, you can skip this. It is basically just a simplified version of the instructions on golang's website.
 
@@ -39,7 +74,7 @@ export PATH="$PATH:$GOPATH/bin"
 
 After saving the file, run `source ~/.bashrc` and you're good to go.
 
-### Installing
+#### Installing
 
 This bit is fairly simple.
 
