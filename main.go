@@ -35,7 +35,7 @@ func main() {
 				}
 			}
 
-			print("values", m)			
+			print(nil, m)			
 		} else {
 			fmt.Printf("err %v parsing file\n", err)
 		}
@@ -44,9 +44,12 @@ func main() {
 	}
 }
 
-func print(key string, val interface{}) {
+func print(key, val interface{}) {
 	if v, ok := val.(map[interface{}]interface{}); ok {
-		fmt.Printf("\n--> %s\n", key)
+		if key != nil {
+			fmt.Printf("\n--> %s\n", key)
+		}
+		
 		for k, val := range v {
 			print(k.(string), val)
 		}
