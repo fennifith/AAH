@@ -1,7 +1,38 @@
-help:
-    stuff: this program does stuff
-    things: it also does things
-    plentiful: the things are very plentiful
-
 disk:
     mount: mkdir /mnt/disk && mount <device> /mnt/disk
+    view: df -h
+
+dir:
+    size: du -h
+    list: ls
+    go: cd <dir>
+    make:
+        single: mkdir <dir>
+        multiple: mkdir {<dir1>,<dir2>,<dir3>,...}
+        successive: mkdir -p <path>
+
+gui:
+    open: startx <program (absolute path)>
+    close: killall /usr/bin/xinit
+
+network:
+    start: /usr/bin/NetworkManager --no-daemon
+    wifi:
+        list: nmcli dev wifi
+        connect:
+            new: nmcli dev wifi connect <ssid> (password <password>)
+            previous: nmcli connection up <ssid>
+        add: nmcli connection add type wifi con-name "<ssid>" ...
+
+display:
+    brightness: setpci -s 00\:02.0 F4.B-<brightness (hex)>
+
+dev:
+    compile:
+        java: javac <file>
+        c: gcc -o <output> <file>
+        go: go build
+    run:
+        java: java <class>
+        go: go run <file>
+        nodejs: node <file>
