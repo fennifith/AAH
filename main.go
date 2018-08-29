@@ -31,7 +31,7 @@ func main() {
 						return
 					}
 				} else {
-					fmt.Printf("couldn't find key '%s'\n\n---\n", os.Args[i])
+					fmt.Printf("couldn't find key '%s'\n\n--------------------\n", os.Args[i])
 				}
 			}
 
@@ -46,12 +46,12 @@ func main() {
 
 func print(key string, val interface{}) {
 	if v, ok := val.(map[interface{}]interface{}); ok {
-		fmt.Printf("\n%s:\n", key)
+		fmt.Printf("\n--> %s\n", key)
 		for k, val := range v {
 			print(k.(string), val)
 		}
 		fmt.Printf("\n")
 	} else {
-		fmt.Printf("%s: \t\t%s\n", key, val)
+		fmt.Printf("%-15s| \t\t%s\n", key, val)
 	}
 }
