@@ -4,5 +4,5 @@ For example:
 
 ```
 ~$ AAH disk mount
-- mount a disk:				mkdir /mnt/disk && mount <device> /mnt/disk
+mount: 		mkdir /mnt/disk && mount <device> /mnt/disk
 ```

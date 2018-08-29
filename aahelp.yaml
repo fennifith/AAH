@@ -1,0 +1,7 @@
+help:
+    stuff: this program does stuff
+    things: it also does things
+    plentiful: the things are very plentiful
+
+disk:
+    mount: mkdir /mnt/disk && mount <device> /mnt/disk
