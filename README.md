@@ -15,13 +15,15 @@ Installation is fairly simple. I will not provide a prebuilt binary for this pro
 ### Prerequisites
 
 - [git](https://git-scm.org/downloads)
-- [go](https://golang.org/doc/install)
+- [go](https://golang.org/dl/)
 
 ### Setup
 
 If you have `go` set up already, you can skip this. It is basically just a simplified version of the instructions on golang's website.
 
-Follow the link above for instructions to download and install go. After installing go, you will want to create a "workspace" for your go projects. In this instructions, I will be creating the workspace at `~/go`, but feel free to change this directory to your liking.
+Follow the link above for instructions to download and install the go binary. After installing go, you can either keep following these instructions or follow the installation instructions linked on the download page. Either way, you will end up with a similar result.
+
+Next, you will want to create a "workspace" for your go projects. In this instructions, I will be creating the workspace at `~/go`, but feel free to change this directory to your liking.
 
 ```shell
 mkdir go && cd go
@@ -37,7 +39,7 @@ export PATH="$PATH:$GOPATH/bin"
 
 After saving the file, run `source ~/.bashrc` and you're good to go.
 
-### Downloading
+### Installing
 
 This bit is fairly simple.
 
