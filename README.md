@@ -88,7 +88,7 @@ After this, you can try running `AAH` to check that it has installed properly.
 
 ## Configuration
 
-Configuration is fairly basic. The program will use the [`aahelp.yaml`](./aahelp.yaml) file in the repository by default. You can override this file by creating your own located at `~/.aahelp.yaml`.
+Configuration is fairly basic. The program will use the [`aahelp.yaml`](./aahelp.yaml) file in the repository by default. You can override the values in this file or add your own by creating another located at `~/.aahelp.yaml`.
 
 The file uses basic YAML syntax (which can be easily learnt by just taking a glance at the default file in the repository), though it should be noted that there is no support for arrays as they do not make much sense in this context.
 
