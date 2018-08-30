@@ -56,7 +56,7 @@ func main() {
 				}
 			}
 
-			PrintMap(nil, m)			
+			PrintMap(nil, m, -1)			
 		} else {
 			fmt.Printf("err %v parsing file\n", err)
 		}
@@ -81,18 +81,22 @@ func MergeMap(m1 map[interface{}]interface{}, m2 map[interface{}]interface{}) ma
 	return m1
 }
 
-func PrintMap(key, val interface{}) {
+func PrintMap(key, val interface{}, iter int) {
+	indent := ""
+	for i := 0; i < iter; i++ {
+		indent += "  "
+	}
+
 	if v, ok := val.(map[interface{}]interface{}); ok {
 		if key != nil {
-			fmt.Printf("\n--> %s\n", key)
+			fmt.Printf("%s:\n", indent + key.(string))
 		}
 		
 		for k, val := range v {
-			PrintMap(k.(string), val)
+			PrintMap(k.(string), val, iter + 1)
 		}
-		fmt.Printf("\n")
 	} else {
-		fmt.Printf("%-15s| \t\t%s\n", key, val)
+		fmt.Printf("%-30s%s\n", indent + key.(string) + ":", val)
 	}
 }
 
