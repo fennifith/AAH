@@ -15,7 +15,7 @@ gui:
     open: startx <program (absolute path)>
     close: killall /usr/bin/xinit
 
-network:
+net:
     start: /usr/bin/NetworkManager --no-daemon
     wifi:
         list: nmcli dev wifi
