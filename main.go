@@ -97,6 +97,8 @@ func PrintMap(key, val interface{}) {
 }
 
 func DownloadFile(path string, url string) error {
+	os.MkdirAll(path[:len(path)-11], os.ModePerm)
+
 	out, err := os.Create(path)
 	if err != nil {
 		return err
