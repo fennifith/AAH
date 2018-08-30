@@ -1,14 +1,15 @@
 package main
 
 import (
-	"os"
-	"os/user"
-	"net/http"
 	"fmt"
+	"github.com/fatih/color"
 	"gopkg.in/yaml.v2"
 	"io"
 	"io/ioutil"
-	"github.com/fatih/color"
+	"net/http"
+	"os"
+	"os/user"
+	"strings"
 )
 
 func main() {
@@ -18,13 +19,13 @@ func main() {
 
 	if _, err := os.Stat(filePath); err != nil {
 		err := DownloadFile(filePath, "https://raw.githubusercontent.com/TheAndroidMaster/AAH/master/aahelp.yaml")
-		if (err == nil) {
+		if err == nil {
 			main()
 		} else {
 			fmt.Printf("tried to download aahelp.yaml from TheAndroidMaster/AAH, didn't work\n%s\n", err)
 			fmt.Printf("please download the file to ~/.config/aah/aahelp.yaml yourself and the program will work\n")
 		}
-		
+
 		return
 	}
 
@@ -32,9 +33,10 @@ func main() {
 	userFile, userErr := ioutil.ReadFile(userFilePath)
 	if err == nil {
 		m := make(map[interface{}]interface{})
+		keys := ""
 		err = yaml.Unmarshal([]byte(file), &m)
 		if err == nil {
-			if (userErr == nil) { 
+			if userErr == nil {
 				m2 := make(map[interface{}]interface{})
 				err = yaml.Unmarshal([]byte(userFile), &m2)
 				if err == nil {
@@ -43,13 +45,15 @@ func main() {
 					fmt.Printf("your file ~/.aahelp.yaml is not formatted correctly: %s\n", err)
 				}
 			}
-		
+
 			for i := 1; i < len(os.Args); i++ {
-				if val, ok := m[os.Args[i]]; ok {
+				if key, val, ok := FindVal(os.Args[i], m); ok {
+					keys += key + " "
 					if v, ok := val.(map[interface{}]interface{}); ok {
 						m = v
 					} else {
-						fmt.Printf("%s: \t\t%s\n", os.Args[i], val)
+						fmt.Printf("%s: \t\t", keys)
+						color.New(color.FgWhite, color.Bold).Printf("%s\n", val)
 						return
 					}
 				} else {
@@ -57,13 +61,33 @@ func main() {
 				}
 			}
 
-			PrintMap(nil, m, -1)			
+			indent := -1
+			if len(keys) > 0 {
+				color.New(color.FgBlue, color.Bold).Printf("%s:\n", keys)
+				indent = 0
+			}
+			
+			PrintMap(nil, m, indent)
 		} else {
 			fmt.Printf("err %v parsing file\n", err)
 		}
 	} else {
 		fmt.Printf("err reading file\n")
 	}
+}
+
+func FindVal(key string, m map[interface{}]interface{}) (string, interface{}, bool) {
+	if val, ok := m[key]; ok {
+		return key, val, true
+	}
+
+	for key2, v := range m {
+		if k2, ok := key2.(string); ok && strings.HasPrefix(k2, key) {
+			return k2, v, true
+		}
+	}
+
+	return "", nil, false
 }
 
 func MergeMap(m1 map[interface{}]interface{}, m2 map[interface{}]interface{}) map[interface{}]interface{} {
@@ -90,14 +114,14 @@ func PrintMap(key, val interface{}, iter int) {
 
 	if v, ok := val.(map[interface{}]interface{}); ok {
 		if key != nil {
-			color.New(color.FgBlue, color.Bold).Printf("%s:\n", indent + key.(string))
+			color.New(color.FgBlue, color.Bold).Printf("%s:\n", indent+key.(string))
 		}
-		
+
 		for k, val := range v {
-			PrintMap(k.(string), val, iter + 1)
+			PrintMap(k.(string), val, iter+1)
 		}
 	} else {
-		fmt.Printf("%-30s", indent + key.(string) + ":")
+		fmt.Printf("%-30s", indent+key.(string)+":")
 		color.New(color.FgWhite, color.Bold).Printf("%s\n", val)
 	}
 }
