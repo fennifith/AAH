@@ -8,6 +8,7 @@ import (
 	"gopkg.in/yaml.v2"
 	"io"
 	"io/ioutil"
+	"github.com/fatih/color"
 )
 
 func main() {
@@ -89,14 +90,15 @@ func PrintMap(key, val interface{}, iter int) {
 
 	if v, ok := val.(map[interface{}]interface{}); ok {
 		if key != nil {
-			fmt.Printf("%s:\n", indent + key.(string))
+			color.New(color.FgBlue, color.Bold).Printf("%s:\n", indent + key.(string))
 		}
 		
 		for k, val := range v {
 			PrintMap(k.(string), val, iter + 1)
 		}
 	} else {
-		fmt.Printf("%-30s%s\n", indent + key.(string) + ":", val)
+		fmt.Printf("%-30s", indent + key.(string) + ":")
+		color.New(color.FgWhite, color.Bold).Printf("%s\n", val)
 	}
 }
 
