@@ -1,5 +1,5 @@
-disk:
-    mount: mkdir /mnt/disk && mount <device> /mnt/disk
+drive:
+    mount: mkdir /mnt/<location> && mount <device> /mnt/<location>
     view: df -h
 
 directory:
