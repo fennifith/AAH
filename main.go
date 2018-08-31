@@ -27,7 +27,7 @@ func main() {
 
 	if (IsArg("version")) {
 		fmt.Printf("You are using AAAAAAAAAAAAAAAAAAAAAAAAAAAAH\n")
-		color.New(color.FgYellow).Printf("Version 1.0.0")
+		color.New(color.FgYellow).Printf("Version 1.0.1")
 		fmt.Printf("\n\nCheck for updates at ")
 		color.New(color.FgCyan).Printf("https://jfenn.me/projects/aah")
 		fmt.Printf("\n")
