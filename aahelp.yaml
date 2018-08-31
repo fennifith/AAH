@@ -1,11 +1,11 @@
-disk:
-    mount: mkdir /mnt/disk && mount <device> /mnt/disk
+drive:
+    mount: mkdir /mnt/<location> && mount <device> /mnt/<location>
     view: df -h
 
-dir:
+directory:
     size: du -h
     list: ls
-    go: cd <dir>
+    goto: cd <dir>
     make:
         single: mkdir <dir>
         multiple: mkdir {<dir1>,<dir2>,<dir3>,...}
@@ -15,7 +15,7 @@ gui:
     open: startx <program (absolute path)>
     close: killall /usr/bin/xinit
 
-net:
+network:
     start: /usr/bin/NetworkManager --no-daemon
     wifi:
         list: nmcli dev wifi
@@ -27,7 +27,7 @@ net:
 display:
     brightness: setpci -s 00\:02.0 F4.B-<brightness (hex)>
 
-dev:
+development:
     compile:
         java: javac <file>
         c: gcc -o <output> <file>
