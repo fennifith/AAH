@@ -13,6 +13,27 @@ import (
 )
 
 func main() {
+	if (IsArg("help")) {
+		fmt.Printf("AAAAAAAAAAAAAAAAAAAAAAH recognizes most arguments as keys for its YAML config files.\n")
+		fmt.Printf("The project and local configuration files can be found at ~/.config/aah/aahelp.yaml and ~/.aahelp.yaml, respectively.\n")
+		fmt.Printf("Instructions for editing the configuration files can be found at ")
+		color.New(color.FgCyan).Printf("https://jfenn.me/projects/aah")
+		fmt.Printf("\n\nArguments:\n")
+		fmt.Printf("-h, --help \t\t\tDisplays this lovely message.\n")
+		fmt.Printf("-v, --version \t\t\tOutputs the current version.\n")
+		fmt.Printf("-u, --update \t\t\tUpdates the project configuration file from the GitHub repo.\n")
+		return
+	}
+
+	if (IsArg("version")) {
+		fmt.Printf("You are using AAAAAAAAAAAAAAAAAAAAAAAAAAAAH\n")
+		color.New(color.FgYellow).Printf("Version 1.0.0")
+		fmt.Printf("\n\nCheck for updates at ")
+		color.New(color.FgCyan).Printf("https://jfenn.me/projects/aah")
+		fmt.Printf("\n")
+		return
+	}
+
 	user, _ := user.Current()
 	filePath := user.HomeDir + "/.config/aah/aahelp.yaml"
 	userFilePath := user.HomeDir + "/.aahelp.yaml"
