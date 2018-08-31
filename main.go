@@ -17,9 +17,11 @@ func main() {
 	filePath := user.HomeDir + "/.config/aah/aahelp.yaml"
 	userFilePath := user.HomeDir + "/.aahelp.yaml"
 
-	if _, err := os.Stat(filePath); err != nil {
+	if _, err := os.Stat(filePath); err != nil || IsArg("update") {
+		fmt.Printf("Updating config file...\n")
 		err := DownloadFile(filePath, "https://raw.githubusercontent.com/TheAndroidMaster/AAH/master/aahelp.yaml")
 		if err == nil {
+			fmt.Printf("Config updated successfully.\n\n")
 			main()
 		} else {
 			fmt.Printf("tried to download aahelp.yaml from TheAndroidMaster/AAH, didn't work\n%s\n", err)
@@ -73,6 +75,15 @@ func main() {
 		}
 	} else {
 		fmt.Printf("err reading file\n")
+	}
+}
+
+func IsArg(arg string) bool {
+	if len(os.Args) > 1 && strings.HasPrefix(os.Args[1], "-") && strings.HasPrefix(arg, strings.Replace(os.Args[1], "-", "", 2)) {
+		os.Args = append(os.Args[:1], os.Args[2:]...)
+		return true
+	} else {
+		return false
 	}
 }
 
