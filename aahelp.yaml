@@ -6,6 +6,8 @@ directory:
     size: du -h
     list: ls
     goto: cd <dir>
+    zip: zip -r <output> <dir>
+    unzip: unzip <zip>
     make:
         single: mkdir <dir>
         multiple: mkdir {<dir1>,<dir2>,<dir3>,...}
